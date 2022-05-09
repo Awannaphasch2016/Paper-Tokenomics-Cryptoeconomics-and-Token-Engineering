@@ -1,0 +1,452 @@
+#+TITLE: Tokenomics (Cryptoeconomics) and Token Engineering
+#+DATE: <2022-05-04 Thu>
+#+AUTHOR: Anak Wannaphaschaiyong
+#+EMAIL: awannaphasch2016@fau.edu
+#+OPTIONS: toc:nil
+#+LATEX_CLASS: IEEE
+#+latex_header: \usepackage[backend=biber, style=numeric]{biblatex}
+#+latex_header: \addbibresource{/home/awannaphasch2016/org/papers/org-mode-bibtex.bib}
+
+* Abstract
+:PROPERTIES:
+:ID:       ffc5ce6c-6122-4f1d-a36a-dbada98a9532
+:END:
+Blockchain domain evolves very quickly, however, core infrastructure of blockchain has started to mature. For this reason, mental framework to think about blockchain has consolidated. This paper is an introduction to recently emerge subjects: tokenomics and token engineering. The goal of the paper is to provide mental framework to think about tokenomy and to systematically approach evaluation and implement ion of tokenomy via token engineering methodology. The paper discusses significant of blockchain technology that enable tokenomy to materialize and introduce token engineering as a new engineering paradigm and how to approach token design problem. The paper also discusses design components of tokenomics mechanism that is subject to engineering challenge. Lastly, the paper provide framework to evaluate value of tokens.
+* Introduction
+:PROPERTIES:
+:ID:       3f7a2d00-72d8-4e66-ae76-21a06ed9110f
+:END:
+Economy is defined as a large set of inter-connected production and consumption activities that drive allocation of scare resources [[cite:&sowell2014basic]]. Economic is a study of economy. Similarly, tokenomic is a study of tokenomy. Tokenomy is defined as tokenized economy. Instead of using money as a medium of exchange that drive participants incentives, tokenized economy uses token.
+
+Any medium of exchange is a form of share believe. Money is a share believe. One can think of money as global shared believe whose value is determined by underlying economy. In tokenomics, token are a share believe within community. One can think of token as local shared believe whose value is determiend by underlying tokenized economy (aka tokenomy). This definition allows one to substitute tokenomics mechanism that composed a tokenomy.
+
+Section [[*Evolution of Asset Transaction][Evolution of Asset Transaction]] explains significant of blockchain technology through the lens of assets transaction evolution. Next, section [[*Token Engineering (TE)][Token Engineering (TE)]] introduces new paradigm of engineering, called token engineering and explains the needs to adopt engineering practices. Core mechanisms that drive tokenomy are described in [[*Tokenomics Mechanism][Tokenomics Mechanism]]. Previous section is viewed through the lens of token engineer. In [[*Evaluate Value of Token][Evaluate Value of Token]] section, we explains how to value token from participants point of view.
+
+* Evolution of Asset Transaction
+:PROPERTIES:
+:EXPORT_FILE_NAME: Evolution of Asset Transaction
+:ID:       d97b1200-f8af-4277-9786-fe3ce103bfa6
+:END:
+
+Up until recently, the world has experienced three phases of assets transaction. Blockchain technology enables the next phase. In order, the four phases are transaction of physical assets, transaction of electron, transaction of information, and transaction of digital assets.
+
+Each phase increase efficiency of energy required to complete a transaction which depends on three factors: object, process, and rules. Focusing on economic perspective, one can think of an objects as entities with economic value and process as a automatic process of manipulating objects. Example of processes are movement, composability, and duplication etc. Lastly, rules are constraints imposed upon computation of processes and objects [[cite:&tai2020nfting]]. Using analogy of physic, rules are physic law such as gravity. friction put constraint on movement (process) of objects. Lastly, rules are given. No one can change the rules. However, given a set of rules, object and process can be manipulated.
+
+Equation of object and process are provied as followed
+
+#+name: asset_transaction_equation
+\begin{equation}
+object = process_1(O, P)
+\end{equation}
+
+From equation ref:asset_transaction_equation, $object$ is an output of a process.  $process$ function take $O$ and $P$ as input where $O$ is a set of $m$ objects and $P$ is a set of $m$ processes and $n, m \in \mathbb{Z}$.
+
+It is important to understand briefly differences between property, asset, and security. Property is an object that can be owned. Properties of a property is open, permissionless, unsensorable, divisibility, durability, recognizability, scarcity, and portability, see For more information about property [[cite:&saylor2021bitcoin;&breedlove2021philosophy]]. Assets is a property that hold economic value. To clarify confusion, security a financial instrument. It is a type of financial asset. Government of a country determines asset that can be categorized as security or non-security.
+
+Each phase of assets transaction evolution create new types of object and new type of process. Wealth of an economy are expanded as new $object$ and $process$ are creation. During the first evolution phase, assets are physical assets such as tree and rock. Discovers and inventions of fire, weapon, road, car allows new creation of processes like toasting a bread, chopping tree, and riding a car. In the second phase, "transaction of electron" create new objects like electricity, light bulb, and xray and new processes is enable by creation of protocol and communication medium to transfer electricity. With the invention of computer, "transaction of information" phase begins. It allows movement of bits and bytes which represent information. This further increases efficiency of communication and exchange of information. However, information alone is not enough to compose and exchange digital assets. The missing puzzle is technology to enable creation of digital property where digital assets can be built on. The technology that allows for the digital assets to be exchanged is blockchain technology. New form of objects includes NFT and crypto. One may argue that digital assets already exists during "transaction of information" phase. That's correct. To be clear, blockchain technology doesn't create digital assets. Blockchain technology expands creation of new digital asset and enable digital assets to be transacted.
+
+Crypto currency and token are considered as digital assets. Crypto and money are a form of currency. Crypto is a digital asset whose goal is to substitute money. Token complements both cryptocurrency and money. Recall definition of economy previously defined, economy is an incentive alignment mechanism to allocate scarce assets. On the other hand, tokenomy is tokenized economy. Currency can be thought of as a subset of token, hence economic is a study of homogeneous token economy while tokenomic is a study of heterogeneous token economy such that each tokenize economy has different incentive alignment mechanism.
+
+* Token Engineering (TE)
+:PROPERTIES:
+:ID:       3c424f96-387b-4053-bcf4-8dd5d7e299f3
+:END:
+
+#+name: tokenomics_sytem
+#+caption: Cryptoeconomic systems are complex socio-economic system.
+#+Attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220504_020205.png]]
+
+Tokenomics is defined as self-funding mechanism for projects within the token economy. Voshmgir et al. [[cite:&hellerstein2005anatomy]] frame tokenomics as a subfield of economics system, see ref:tokenomics_sytem. Voshmgir et al. cite:&voshmgir2020foundations mentioned that tokenomics' design was subjective and lack rigorous approach and purposed to adopt approaches from existing interdisciplinary field. According to [[cite:&kreitenweis2021token]], token engineering (TE) disciplinary is the most recent engineering discipline after software engineering. TE was mentioned for the first time in 2018. The goal of TE is to bring engineering practice into tokenomics's design by providing methodology to go from ideation to design, modeling, simulation, testing, deployment, and maintentance. Figure ref:interdisciplinary_in_tokenomics shows venn diagram of disciplines that TE can benefit from. Framing TE as a new engineering discipline allows researchers to adapt large body of existing literature and avoid reinvent the wheel.
+
+
+#+name: interdisciplinary_in_tokenomics
+#+caption: Interdisciplinary in token engineering. The image is taken from [[cite:&voshmgir2020foundations]].
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220504_022613.png]]
+
+** TE from an Economic Perspective :noexport:
+TE from an Economic Perspective [fn:14]
+Goal is to models combined all scale of economics modeling including micro, institutional and macro economics.
+
+[DSGE is used in real life by which entity?]
+[what is the assumption of DSGE?]
+
+TEC attempt to DSGE model as a template to map DSGE layers to tokenomics layer. Existing solution in DSGE can be adapted to tokenomics.
+
+#+caption: working backward from existing economic theory to TE.
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220504_051540.png]]
+
+#+caption: institutional economics
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220504_052138.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220504_053347.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220504_053422.png]]
+
+#+caption: The picture show dynamic stochastic general equillibrium model layers. Token designer can map similarity of these layer with token design.
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220504_053616.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220504_054233.png]]
+
+** Functional/Utility Layers :noexport:
+:PROPERTIES:
+:ID:       4bedf0fb-4407-4b66-9a6c-9de93211be80
+:END:
+first layer make sure that token will provide utility.
+*** Examples of utility :noexport:
+**** For public goods. (project that is considered as tragedy of common)
+***** Gitcoin
+
+#+caption: [fn:6]
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220503_121559.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220503_121937.png]]
+
+#+caption: [fn:6]
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220503_122241.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220421_231610.png]]
+
+Figure ref:public is from [fn:1]
+#+name: public goods funding problem
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220421_231133.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220421_231538.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220421_231631.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220421_231716.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220421_231840.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220421_232348.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220421_233409.png]]
+***** CityDAO
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220422_080730.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220422_081000.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220422_081139.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220422_081207.png]]
+
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220422_081940.png]]
+**** For Philanthropy.
+***** read about
+****** [[https://medium.com/giveth][GIVeconomy]]
+**** For Fundraising.
+** Incentive Layers
+:PROPERTIES:
+:ID:       41738688-9adb-41ba-a6f9-d45ae7483dd3
+:END:
+Given functional layer is implemented, incentive layer make sure that members are incentivized to perform unharmful action such that constraints in functional layer is obeyed.
+
+Steps to design and economic game is the following [fn:10]
+1. Choose a goal
+2. Choose a reward mechanism
+3. Choose a reward function to match it.
+
+*** Game theory
+:PROPERTIES:
+:ID:       26286376-d6f5-4357-9cf9-1cbcc614d29e
+:END:
+Game theory are useful in DAO design because it involve interaction of many participants. Design of game theory is categorized into player design and mechanism design. Player design optimize player decisions to maximize their utility gain. Player design goals is to establish equilibrium (e.g. Perfect equilibrium and Nash equilibrium). Effort in player design is put toward finding Nash equilibrium. Nash equilibrium is established when there is no incentive to deviate from the initial strategy to reach optimal outcomes for all players. On the other hand, mechanism design theory studies the mechanisms by which a particular outcomes and results can be achieved. Mechanism design doesn't need to account for equilibrium. Intuitively, the desired outcome can be reached if players doesn't make bad action. In this case, there is no need for players to find the best action.
+
+Game theory should be designed for all weather of the markets. Participants have different incentive to join or abandon the project as market rises and fall.
+
+One common strategy of tokenomic game theory is "lockups." lockups is a mechanism employed by staking. When staking on tokens, the protocol creates and incentive for locking your tokens in a contracts which will return some form of reward in return. This lockups is a form of "conviction voting" [[cite:&honkanen2021organizational]] that is used outside of governance mechanism. Conviction voting is one of many voting mechanism of DOA governance [[cite:&honkanen2021organizational]]. This form of voting goals is to weighted value of vote by time the vote has been submitted for
+
+Game-theoretic approach simplifying assumption imposed by designer knowledge. For this reason, it is difficult to incorporate non-rationality. Furthermore, this disable tokenomics mechanism to evolve to adapt to unknown and unknown unknown. Even when designers have an opportunity to adapt the system, game-theoretic approach requires high computation over-head causing necessary but inevitable delay which allows the problem to amplify its damage or emerge into new and bigger problem.
+
+Incentivai approach the problem by provides parameters to AI models and delegate responsibility of optimization to AI models [[cite:&grudzien2019incentive]]. This approach doesn't simplify dynamic nature of the problems. However, assumptions still exists. The assumptions lie in hyper-parameters of AI models and capability of AI models to find optimal solution. Therefore, instead of training AI end-to-end, AI models can be used as tools to explore optimal strategies outside of the game-theoretic solution. In summary, AI models can substitute mathematical models as optimization components within TE framework.
+
+[explain TE frameworks]
+
+*** Mechanism Design
+Mechanism design is a subfield of game theory. Mechanism design in decentralize system is harder to terminate/update/recovery than in centralized system.
+Example of this problem is bitcoin block size that is programmed to have 1M limit as a results people demand to bit for their transaction to be included in the block and drive up rewards per block which is a great news for miner. For this reason, there is no incentive for miner to agree on increase the block size.
+*** Problem with game theory an mechanism design
+Game theory assumes that game is static, but tokenomics games are not static. To deal with dynamic system, focus should be on control system. This bring back to optimization and to evolutionary algorithm. The goal that should be focus on is how to control evolution of the game and try to understand how it evolves and what it can and cannot evolve. To understand evolution of emergent system, one must find property of the system then add property as a requirement to constraint of the desired system. The iteration continue. This process continuously and systematically narrow down incentives space towards desired behavior.
+*** Case Study: Incentive alignment in Ethereum
+:PROPERTIES:
+:ID:       5c267d7f-6508-4298-8548-d1b5ec42a3f1
+:EXPORT_FILE_NAME: Economic inside blockchain: How does supply-demand mechanism works in blockchain?
+:END:
+This section discuss how tokenomic intertwined with economic. To make concrete example. we will use Ether and proof of work (at the time of writing Ethereum still uses proof of work) as an example.
+**** Gas and Denominations of coins
+:PROPERTIES:
+:ID:       5332332e-d8d5-4297-b41e-68223867029e
+:END:
+#+caption: Denominations of Ethers. Image is borrowed from Etherem yellow paper.
+#+name: img
+#+LABEL: fig:img
+#+attr_html: :width 300px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220315_124959.png]]
+
+In this section, we will focus on denominations of Ethers. The goal is to provide more concrete example into denomination of a coin. According to Etherem yellow paper (aka technical white paper)  [[cite:&wood2014ethereum]], list of all denominators of Ether is shown in Fig. ref:img.
+
+These denominators are units of gas cost in transaction. When discussion about cost of gas, using GWei is more convenience, hence, a more widely use as a unit of gas price. Transaction cost is calculated as (amount of gas $\times$ cost per unit of gas.)
+
+Still, It is important to talk about mechanism in which Wei is value.
+Wei value is calculated based on demands of transaction and supply of gas, more on economy of blockchain this later.
+
+The idea behind gas is to make user pays for computational resources required to complete a transaction on a blockchain. An incentive alignment mechanism is designed to influence demands of a user to run the transaction and pay for computation cost of a smart contract [[cite:&el2021decentralized]].
+**** Optimizing number of gas supply of blockchain at a given point in time.
+:PROPERTIES:
+:ID:       eac18665-6dcd-49b0-8a67-893ba3f9c470
+:END:
+Since number of gas available is equivalent of supply, and production of supplies depend on block size (gas limit per block) and times it take to validate the block (difficulty of the block puzzle). To maximize number of gas supply, we can adjust difficulties of block puzzle such that equation ref:gas_supply_eq is maximize [[cite:&wood2014ethereum]].
+
+
+#+name: gas_supply_eq
+\begin{equation}
+\text{gas supply }= \text{number of block } \times \text{ size of block }
+\end{equation}
+
+The level of difficulties also has to take into account mining power per time unit. Therefore, at a given point in time, we are given mining power per time unit and we have to solve for difficulties that maximize number of gas supply. See the problem statement below for clarification.
+
+#+BEGIN_SRC
+Problem statement
+-----------------
+
+Given (mining power per time unit),
+we must solve for optimal level of
+(puzzle difficulties) such that
+(size of block) and (number of blocks)
+will results in maximum number of gas
+supplies
+
+Base on the following requirement.
+1. solving more difficult puzzle results
+   in less number of block per time
+   interval.
+2. equation 2
+#+END_SRC
+
+Difficulty level has the following formula [[cite:&wood2014ethereum]].
+
+\begin{equation}
+Difficulty\_level = HashRate / Constant
+\end{equation}
+
+$HashRate$ is the "mining power per time unit" we mentioned above.
+
+It is important to note that $HashRate$ cannot be calculated in real time instead it newly generate per cycle which is about 14 days. Hence, calculation of $HashRate$ lags behind actual supply and demand in the market.
+
+**** What is the incentive to mine?
+As we mentioned above that supply of gas controlled by $HashRate$, but what exactly is the underlying incentives for mining? the answer is tokens as minning's reward. For every time block puzzle is solved, fixed number of "reward" is given to miner in the form of tokens. To sum up, solving a block puzzle generate reward to the miner as in the form of tokens and these same tokens are added to the economy as supply of blocks that contains gas. Furthermore, the token itself is an asset which contain value and are tradable whose value is controlled by "coins markets".
+
+value of coin markets is determined by economy of computation and computation market is determined by economy of coins. Computation market is the market that involves miner, smart contract, and gas. Miners supplies gas by solving puzzle (aka mining). Smart contract can be thought of as demand in the market because number gas must be paid as a cost to compute these smart contracts. Lastly, gas is the entity whose value is calculated as $ \text{price of Gwei } $\times$ \text{ number of Gwei}$ and is used to value cost of transaction.
+
+"Coin market" is the market that involves coins owner (which may or may not be miners themselves, coins buyer, and coins. Coin owners are those who possess coins. Coins buyers are those who wants to be the future owner of the coins. Lastly, coins is an entity that hold monetary values and can use as transfer of wealth.
+
+The only factor that tight the market together is "incentive of the miner." miners mine coins because coin can be traded in the "coin market" with "real money". And it just happens that the mined coins are, in facts, consist of blocks which provide supply to the "computation market."
+
+* Tokenomics Mechanism
+:PROPERTIES:
+:ID:       a2b3355d-4929-43f0-bafa-7b337024eda7
+:END:
+
+Tokenomics mechanism is incentive alignment mechanism. There are two mains tokenomics mechanism: fair token distribution and token bonding curve. The idea of tokenomics mechanism is to use financial incentive to compensate for the lack of utility. Example of utilities could be bootstraping phase to bring new users and contributor on board.
+
+** Fair Token Distribution.
+:PROPERTIES:
+:ID:       e98fbb75-53c4-49d1-8a97-426fe85207d6
+:END:
+Main goal of token distribution should be to maximize token distribution to potential users and contributors. Unfairness in token distribution stage, which is the first stage of tokenomics, have compounded effects overtimes cite:&daly2019why.
+
+Token distribution mechanism are mining, ICOs, AirDrops Markle mine, and lock drop [[cite:&daly2019why]] .
+Mining goal is fair and wide distribution with easy access. Problem with mining is that token can be pre-mined and imbalance of information distribution on how and when to mine and associated risk such as solvers take partial reward, miner extractable value (MEV), from miners. AirDrop solve information imbalance by simply giving away free token. However, this attracts less enthusiastic people which increase risk of idle and decrease token circulation. ICO (token sale) solve information imbalance and token idleness by allowing investors to buy token during token sale. However, ICO is a form of fund raising. Existing problem of fund raising is wealth imbalance, where richer individuals can buy more token, which leads to concentration of power defeating purposing of decentralization. Lock drop allows user to stake target token with other tokens. Recall that staking earns token holder cash flow as passive income without selling token. It is equivalent of a high-yield saving account.
+
+** Token Bonding Curve
+In simple word, bonding curve is a function that take token as input and output different token. Bonding curve enable token model that allow community to create wealth together by solving coordination problem. This is done by creating reward and cost for information sharing. In another word, token bonding curve is a function of token supply, cost of communication, and protocol automation cost.
+
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220504_233447.png]]
+
+* Evaluate Value of Token
+Value of token is reflected from equivalent fiat currency value owned. According to price discovery mechanism [[cite:&walsh2017monetary]], price of a supply can be calculated from two demand functions and supply functions.
+** Demand Mechanism
+:PROPERTIES:
+:ID:       069b5f01-53da-4703-a9b5-8553448e5b28
+:END:
+
+One can get evaluate utility of a token. There are four types of utility: Spending vs Holding, Cash flows, Governance, and Collateral [[cite:&eliason2022tokenomics]].
+
+Some tokens are designed to be either spent (spending token) or hold (holding token).
+Utility of holding token depends on supply and demands of the token itself. This is equivalent to money. In the other word, token as an medium of exchange. On the other hand,
+
+Designing purpose for spending token is such that the token itself has no holding utility. In the other word, tokens should be bought to spent. The faster one spends the token, the less opportunity cost the token creates --- there is no cash flow or other utilities while holding token. Spending token must be spent to realized utility gain. This is rather a common usecase in real life. Imagine a concert ticket. The ticket utility is to get an individual into a concern. That's all its utility. There are a period where the prices of ticket fluctuate due to demand-supply right before the concert started. After the concert is finished, utility and demands reaches zero. Example of spending token is $LINK token which is used to buy Chainlink's services, see figure ref:$LINK for $LINK token historical prices. When analyses price level of a spending token, one should think from token designer's point of view. In the case of $LINK, Chainlink doesn't want its services to be expensive, hence Chainlink may implement mechanism to keep the price low.
+
+#+name: $LINK token historical prices.
+#+caption: An example of holding token prices. $LINK token is used to buy Chainlink's services.
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220423_114515.png]]
+
+*** Cash flows from holding token
+:PROPERTIES:
+:ID:       f89b3a0d-fbe4-43fe-bbac-510286a47863
+:END:
+If you decide to hold a token, what is the utility that holding token should bring? The obvious reason is to increase in values of total token holds in the future. Total value of token in blockchain project increase is via incentives engineering either by
+1. Discouraging people from selling your token
+2. Encouraging people to buy the token.
+
+To increase value of total tokens,
+
+** Supply Mechanism
+This mechanism concerns inflation/deflation components of token which is a function of the following factors: number of existed token, token in circulation, token distribution, unlock schedule of remaining token. Token mechanism that can effect token values are burns and split. There are token mechanisms that amplify return of investment (ROI) by utilizing staking, among other.
+
+Evaluating token supply requires asking the following question.
+1. Where is the supply right now?
+2. Where will it be in the future?
+3. When will it be there?
+4. How will it get there?
+
+*** Initial Token distribution
+Token distribution describes the proportions in which ownership is distributed among different groups of users. Figure ref:intial_token_allocation_for_public_blockchain show intial token allocation for public blockchain. The figure is borrowed from Messari website.
+
+#+name: intial_token_allocation_for_public_blockchain
+#+caption: intial token allocation for public blockchain
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220504_231549.png]]
+
+*** Supply Metrics
+:PROPERTIES:
+:ID:       8919b745-7f2c-415b-91a4-1efe83913e7d
+:END:
+The market cap and the fully diluted valuation (FDV) are the two common metrics. The market cap measure total value of all tokens at the current time point while FDV measure total value of all token of all possible supply that can be produced.
+
+The market cap is the circulating supply of tokens multiplied by the token price. The FDV is the current price multiplied by the max supply, if all tokens were in circulation.
+
+A way to think of this is if the market cap is 10% of the FDV and the tokens are all released in the next year. Project will have to grow 10x to maintain its current price. So the question one should ask before invest in the project long term is "Will price of cost increase by 10x when all supply is released?"
+
+*** Supply Circulation
+Knowing number of tokens released at a given point in time is not enough. Price discovery, according to monetarist theory, is formulate as $PQ=MV$ where $P$ is price per unit of supply, $Q$ is quantity of supply, $M$ is money and $V$ is value [[cite:&walsh2017monetary]]. Velocity of the token circulation is also important. Velocity depends on circulating supply. circulating supply is a supply of actively traded token. "Inactivity" of token calculation differs between information platforms supplying the API as seen in figure ref:circulating_supply_of_$RAIDER and figure ref:circulating_supply_of_$CRV.
+
+#+name: circulating_supply_of_$RAIDER
+#+caption: circulating supply of $RAIDER
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220422_224334.png]]
+
+#+name: circulating_supply_of_$CRV
+#+caption: circulating supply of $CRV
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220422_224500.png]]
+
+*** Supply Expansions and Contractions Mechanism
+Emission rates is a mechanism of injecting new tokens into the circulation. The impact of emission rates depends heavily on the initial token distribution plan. This is because often time token emission are release based on percentage of total tokens. Emission schedules can either be static or dynamic. Static emission schedules of JonesDAO is shown in figure ref:JonesDAO's_emission_rates_overtime. According to ref:JonesDAO's_emission_rates_overtime, during the displayed preriod, the inflation rate will be more than doubled. And the new tokens entering the market will exclusively be going to people who got in at a heavily discounted price. Furthermore, dynamic emission schedule of Convex ($CVX) is shown in figure ref:Convex_emission_rate_overtime. $CVX emission rate is a function of CRV rewards farmed by Convex [[cite:&covex2021tokenomics]], hence the name performance-based emission. Covex is a liquidator platform and farming is a Defi's terminology meaning staking on assets to be put in the liquidity pools.
+
+#+name: JonesDAO's_emission_rates_overtime
+#+caption: JonesDAO's emission overtime
+#+attr_html: :width 500px
+[[file:/home/awannaphasch2016/org/notes/blockchains/images/screenshot_20220422_225225.png]]
+#+name: Convex_emission_rate_overtime
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220504_223846.png]]
+** Inflationary and Deflationary factors of Token
+:PROPERTIES:
+:ID:       8cec410d-88a7-4585-861e-5d2784211821
+:END:
+
+#+name: supply_demand_curve
+#+attr_html: :width 500px
+[[file:./images/screenshot_20220508_193401.png]]
+
+Ethereum has a problem with high-gas fee due to high demands in "computation market." see section [[*What is the incentive to mine?][What is the incentive to mine?]] for more information. To combat this problem, ether introduce burn rate mechanism. Burn rate mechanism reduce number of ETH and as a result drive up the price of ETH in the long term, due to supply shift according to figure ref:supply_demand_curve. According to "coin market" and "computation market" mentioned in [[*What is the incentive to mine?][What is the incentive to mine?]], price of ETH token aligns incentive between the two markets. For this reason, self balance mechanism is a function of ETH price. This ways ETH price will always converge to proper valuation based on self-correcting mechanism (see ref:self_balance_mechanism) regardless of shortage/surplus of trader's demand from "coin market" or computation demand from "computation market."
+
+As of [2022-05-08 Sun], I am not sure how Ethereum control its total ETH supply.
+
+\begin{equation}
+\text{total ETH produced per block } = \text{ burn rate } + \text{added ETH supply}
+\end{equation}
+
+#+name: self_balance_mechanism
+#+BEGIN_SRC txt
+ETH price too low = more burn = deflation = price goes up = less burn = inflation = price goes down = ... everything self-balances!
+#+END_SRC
+
+
+* Conclusion
+The paper provide mental framework to think about significant of blockchain technology by explaining evolution of asset transaction. Then, the paper explains token engineering methodology and justifies the need to adopt engineering practices. Furthermore, multiple tokenomics mechanism is explained. Lastly, the paper discuss framework to analyze value of token.
+
+* Bibliography :ignore:
+:PROPERTIES:
+:ID:       308095ea-93bb-409e-ac4f-8da9f0d7839c
+:END:
+\printbibliography
+
+* Notes :noexport:
+** Fei Protocol[fn:3]
+*** Governance
+**** voting mechanism
+:PROPERTIES:
+:ID:       f38284f9-2c26-4441-8b5a-bfbdae17935d
+:END:
+
+The Fei DAO is forked from the Compound Governor Alpha and Timelock.
+Parameter modifications from Compound implementation:
+2.5% Quorum
+.25% proposal threshold
+12 hour voting delay (3333 blocks)
+36 hour voting period (10000 blocks)
+24 hour timelock delay
+Instead of the COMP token, the Fei DAO is controlled by TRIBE
+
+This voting mechanism is a type of vote-driven mechanism, called Token based quorum voting. [[cite:&honkanen2021organizational]].
+
+**** TRIBE token [fn:5]
+TRIBE token is a token for govenerance in =Fei Protocol=
+High-level TRIBE distribution during early days
+- 40% DAO treasury
+- 20% Initital DEX Offering
+- 13% Fei Core Team
+- 10% Genesis Group
+- 10% Staking Rewards
+- 5% Fei Core Team investors
+- 2% Grants
+
+* Footnotes
+
+[fn:600] [[https://www.youtube.com/watch?v=_qNnVgIAmro&ab_channel=GrandAmphiTh%C3%A9atre][Angela Kreitenweis: Token Engineering Research Groups A Multidisciplinary use case for Open Science]]
+[fn:500] [[https://medium.com/fei-protocol/the-tribe-token-distribution-887f26169e44][The TRIBE Token Distsribution]]
+[fn:300] [[https://docs.fei.money/governance/fei-dao][Fei Protocol Documentation]]
+[fn:100] [[https://www.youtube.com/watch?v=y_y0uOl9AjI&ab_channel=BlockchainatBerkeley][Lecture 11: Special Topics, REhspaing Social Organizaiton thorugh DAOs]]
+[fn:16] [[https://www.eastshore.xyz/factors-affecting-cryptocurrency-mining-profit/][Factors Affecting Cryptocurrency Mining Profits]]
+[fn:15] [[https://www.youtube.com/watch?v=50FaTTTL6hY&list=PL-GxJch-YeZcU6Jm988U0waydYTLa43NZ&index=5&ab_channel=TokenEngineering][TE from an Economic Perspective | Shermin Voshmgir and Krzysztof Paruch]]
+[fn:14] [[https://www.youtube.com/watch?v=DsRG9uZmME8&ab_channel=TokenEngineering][Token Engineering Fundamentals | Michael Zargham & Matt Barlin, BlockScience]]
+[fn:13] [[https://www.youtube.com/watch?v=_qNnVgIAmro&ab_channel=GrandAmphiTh%C3%A9atre][Angela Kreitenweis: Token Engineering Research Groups A Multidisciplinary use case for Open Science]]
+[fn:12] [[https://www.youtube.com/watch?v=VcuEm53f5GM&list=PLM4u6XbiXf5qXKZixrDpN3ZSwH_8UabPq&index=25&ab_channel=a16z][Cryptonetworks and Cities: Analogies]]
+[fn:11] [[https://www.youtube.com/watch?v=UZWYGCxE_-w&list=PLM4u6XbiXf5qXKZixrDpN3ZSwH_8UabPq&index=18&ab_channel=a16z][Social Networking in 2030: How Could Crypto Change Things?]]
+[fn:10] [[https://www.youtube.com/watch?v=gCFlGLbI_kE&ab_channel=TechCrunch][Sam Williams: Mechanism Design 101]]
+[fn:9] [[https://www.youtube.com/watch?v=6qfoylDftK8&ab_channel=BlockchainatBerkeley][Bitcoin in the Wild: Game Theory and Attackes]]
+[fn:8] [[https://cryptonat.substack.com/p/tokenomics-103-utility?s=r][Tokenomics 103: Evaluting Token Utility]]
+[fn:7] [[https://docs.convexfinance.com/convexfinance/general-information/tokenomics][CVX token emission strategy]]
+[fn:6] [[https://cryptonat.substack.com/p/tokenomics-101?s=r][Tokenomics 101: The Basics of EValuating Cryptocurrencies -- DeFriday #19]]
+[fn:5] [[https://medium.com/fei-protocol/the-tribe-token-distribution-887f26169e44][The TRIBE Token Distsribution]]
+[fn:4] [[https://www.frontiersin.org/articles/10.3389/fbloc.2021.613115/full][Organizational Building Blocks for Blockchain Governance: A Survey of 241 Blockchain White Papers]]
+[fn:3] [[https://docs.fei.money/governance/fei-dao][Fei Protocol Documentation]]
+[fn:2] [[https://www.reddit.com/r/dao/comments/p6ekxb/what_is_a_social_token_nft/][What is a Social token? (NFT)]]
